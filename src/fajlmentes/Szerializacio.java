@@ -1,6 +1,12 @@
 package fajlmentes;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Szerializacio {
     
@@ -35,7 +41,17 @@ public class Szerializacio {
     }
 
     private void szerializalas() {
-        
+        FileOutputStream kiFajl;
+        try{
+            kiFajl = new FileOutputStream("adat.ser");
+            ObjectOutputStream kiObj = new ObjectOutputStream(kiFajl);
+            kiObj.writeObject(kartyak);
+            kiObj.close();
+        } catch (FileNotFoundException ex){
+            Logger.getLogger(Szerializacio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Szerializacio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void deszerializalas() {
