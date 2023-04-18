@@ -9,6 +9,7 @@ public class Kartya {
         this.valasz = valasz;
     }  
     
+    
     public static void main(String[] args) {
         
     }
