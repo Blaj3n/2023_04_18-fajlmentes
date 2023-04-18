@@ -1,8 +1,10 @@
 package fajlmentes;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -54,7 +56,17 @@ public class Szerializacio {
         }
     }
 
-    private void deszerializalas() {
-        
+    private void deszerializalas() throws ClassNotFoundException {
+        FileInputStream beFajl;
+        try {
+            beFajl = new FileInputStream("adat.ser");
+            ObjectInputStream beObj = new ObjectInputStream(beFajl);
+            kartyak = (ArrayList<Kartya>)beObj.readObject();
+            beObj.close();
+        }catch (FileNotFoundException ex){
+            Logger.getLogger(Szerializacio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Szerializacio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
